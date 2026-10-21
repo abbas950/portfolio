@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عباس | معرض الأعمال</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--accent-color); }
+        .nav-links a, .lang-btn {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        html[dir="ltr"] .nav-links a { margin-left: 0; margin-right: 15px; }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .lang-btn:hover { background: var(--accent-color); color: #000; }
+
+        /* Hero */
+        .hero h1 { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 10px; }
+        .hero h2 { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 15px; }
+        .btn-group { display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary { background: var(--accent-color); color: #000; }
+        .btn-secondary { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* Sections */
+        section { margin-top: 50px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .section-title { font-size: 1.8rem; border-bottom: 2px solid var(--accent-color); display: inline-block; padding-bottom: 5px; }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .card-title { font-size: 1.3rem; margin-bottom: 10px; color: #fff; }
+        .tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 15px 0; }
+        .tag { background: #334155; color: var(--accent-color); padding: 4px 12px; border-radius: 15px; font-size: 0.85rem; }
+
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+
+        /* Modal */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-content {
+            background: var(--card-bg); padding: 30px; border-radius: 12px; width: 90%; max-width: 500px;
+        }
+        .modal input, .modal textarea {
+            width: 100%; padding: 10px; margin: 8px 0; background: var(--bg-color);
+            border: 1px solid var(--border-color); color: #fff; border-radius: 6px;
+        }
+
+        footer { text-align: center; margin-top: 60px; color: var(--text-muted); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navbar -->
+        <header>
+            <div class="logo" id="logoText">عباس</div>
+            <div class="nav-links">
+                <a href="https://github.com/abbas950" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/abbas950" target="_blank">LinkedIn</a>
+                <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1 id="heroTitle">أهلاً بك، أنا عباس 👋</h1>
+            <h2 id="heroSub">طالب هندسة حاسوب ومطور تطبيقات موبايل وذكاء اصطناعي</h2>
+            <p id="heroDesc">أتخصص في بناء تطبيقات الموبايل باستخدام Flutter، وإعداد سيرفرات سحابية عالية الأداء بـ FastAPI، ودمج خدمات الذكاء الاصطناعي والمعالجة البرمجية للصور.</p>
+            
+            <div class="btn-group">
+                <a href="https://wa.me/+9647734188189" target="_blank" class="btn btn-primary" id="btnWa">تواصل عبر واتساب</a>
+                <a href="mailto:abbasmosh950@gmail.com" class="btn btn-secondary" id="btnEmail">إرسال بريد إلكتروني</a>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title" id="projectsTitle">المشاريع 🚀</h2>
+                <button class="btn btn-primary" onclick="openModal()" id="btnAddProject">+ إضافة مشروع</button>
+            </div>
+
+            <div id="projectsList">
+                <div class="card">
+                    <h3 class="card-title" id="p1Title">SolarDust Guard — فحص الألواح الشمسية بالذكاء الاصطناعي</h3>
+                    <p id="p1Desc">تطبيق موبايل وسيرفر سحابي متكامل يستخدم الرؤية الحاسوبية (OpenCV) والذكاء الاصطناعي لفحص غبار الألواح الشمسية وحساب نسبة فقدان الكفاءة وتقديم توصيات الصيانة.</p>
+                    <div class="tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">OpenCV</span>
+                        <span class="tag">LangChain</span>
+                        <span class="tag">Render Cloud</span>
+                    </div>
+                    <a href="https://github.com/abbas950/solardust-backend" target="_blank" class="btn btn-secondary" id="p1Btn">عرض المستودع والكود</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section>
+            <h2 class="section-title" id="servicesTitle">الخدمات التي أقدمها 🛠️</h2>
+            <div class="services-grid" style="margin-top: 20px;">
+                <div class="card">
+                    <h3 class="card-title" id="s1Title">تطبيقات الموبايل</h3>
+                    <p id="s1Desc">تطبيقات Flutter متكاملة وبواجهات حديثة متواكبة مع أحدث معايير التصميم.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title" id="s2Title">سيرفرات سحابية</h3>
+                    <p id="s2Desc">بناء سيرفرات FastAPI سريعة ومحمية ومرفوعة على البيئة السحابية.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title" id="s3Title">ذكاء اصطناعي</h3>
+                    <p id="s3Desc">دمج نماذج الذكاء الاصطناعي ومعالجة الصور المتقدمة داخل التطبيقات.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p id="footerText">© 2026 عباس — جميع الحقوق محفوظة</p>
+        </footer>
+    </div>
+
+    <!-- Modal for Adding New Project -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 15px;" id="modalTitle">إضافة مشروع جديد</h3>
+            <input type="text" id="inputTitle" placeholder="عنوان المشروع">
+            <textarea id="inputDesc" placeholder="وصف المشروع" rows="3"></textarea>
+            <input type="text" id="inputTags" placeholder="التقنيات (مفصولة بـ فاصلة ,)">
+            <input type="text" id="inputUrl" placeholder="رابط GitHub">
+            <div class="btn-group" style="justify-content: flex-end;">
+                <button class="btn btn-secondary" onclick="closeModal()">إلغاء</button>
+                <button class="btn btn-primary" onclick="addNewProject()">حفظ</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'ar';
+
+        const content = {
+            ar: {
+                title: "عباس | معرض الأعمال",
+                logo: "عباس",
+                langBtn: "English",
+                heroTitle: "أهلاً بك، أنا عباس 👋",
+                heroSub: "طالب هندسة حاسوب ومطور تطبيقات موبايل وذكاء اصطناعي",
+                heroDesc: "أتخصص في بناء تطبيقات الموبايل باستخدام Flutter، وإعداد سيرفرات سحابية عالية الأداء بـ FastAPI، ودمج خدمات الذكاء الاصطناعي والمعالجة البرمجية للصور.",
+                btnWa: "تواصل عبر واتساب",
+                btnEmail: "إرسال بريد إلكتروني",
+                projectsTitle: "المشاريع 🚀",
+                btnAddProject: "+ إضافة مشروع",
+                p1Title: "SolarDust Guard — فحص الألواح الشمسية بالذكاء الاصطناعي",
+                p1Desc: "تطبيق موبايل وسيرفر سحابي متكامل يستخدم الرؤية الحاسوبية (OpenCV) والذكاء الاصطناعي لفحص غبار الألواح الشمسية وحساب نسبة فقدان الكفاءة وتقديم توصيات الصيانة.",
+                p1Btn: "عرض المستودع والكود",
+                servicesTitle: "الخدمات التي أقدمها 🛠️",
+                s1Title: "تطبيقات الموبايل",
+                s1Desc: "تطبيقات Flutter متكاملة وبواجهات حديثة متواكبة مع أحدث معايير التصميم.",
+                s2Title: "سيرفرات سحابية",
+                s2Desc: "بناء سيرفرات FastAPI سريعة ومحمية ومرفوعة على البيئة السحابية.",
+                s3Title: "ذكاء اصطناعي",
+                s3Desc: "دمج نماذج الذكاء الاصطناعي ومعالجة الصور المتقدمة داخل التطبيقات.",
+                footerText: "© 2026 عباس — جميع الحقوق محفوظة"
+            },
+            en: {
+                title: "Abbas | Portfolio",
+                logo: "Abbas",
+                langBtn: "عربي",
+                heroTitle: "Hi, I'm Abbas 👋",
+                heroSub: "Computer Engineering Student & Full-Stack Mobile/AI Developer",
+                heroDesc: "I specialize in building production-ready mobile applications with Flutter, scalable backends using FastAPI, and integrating Computer Vision & LLM AI microservices.",
+                btnWa: "Contact on WhatsApp",
+                btnEmail: "Send Email",
+                projectsTitle: "Projects 🚀",
+                btnAddProject: "+ Add Project",
+                p1Title: "SolarDust Guard — AI Solar Panel Inspector",
+                p1Desc: "An end-to-end production mobile & cloud microservice using OpenCV & LLMs to inspect solar panels for dust accumulation, calculate efficiency loss, and deliver maintenance advice.",
+                p1Btn: "View Source Code",
+                servicesTitle: "Services I Offer 🛠️",
+                s1Title: "Mobile Apps",
+                s1Desc: "Cross-platform Flutter apps with Material 3, clean architecture, and API integration.",
+                s2Title: "FastAPI Backends",
+                s2Desc: "High-performance Python cloud microservices deployed on platforms like Render.",
+                s3Title: "AI Integration",
+                s3Desc: "Integrating Computer Vision (OpenCV) & LLMs into user-facing applications.",
+                footerText: "© 2026 Abbas — All Rights Reserved"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+
+            const langData = content[currentLang];
+            document.title = langData.title;
+            document.getElementById('logoText').innerText = langData.logo;
+            document.getElementById('langBtn').innerText = langData.langBtn;
+            document.getElementById('heroTitle').innerText = langData.heroTitle;
+            document.getElementById('heroSub').innerText = langData.heroSub;
+            document.getElementById('heroDesc').innerText = langData.heroDesc;
+            document.getElementById('btnWa').innerText = langData.btnWa;
+            document.getElementById('btnEmail').innerText = langData.btnEmail;
+            document.getElementById('projectsTitle').innerText = langData.projectsTitle;
+            document.getElementById('btnAddProject').innerText = langData.btnAddProject;
+            document.getElementById('p1Title').innerText = langData.p1Title;
+            document.getElementById('p1Desc').innerText = langData.p1Desc;
+            document.getElementById('p1Btn').innerText = langData.p1Btn;
+            document.getElementById('servicesTitle').innerText = langData.servicesTitle;
+            document.getElementById('s1Title').innerText = langData.s1Title;
+            document.getElementById('s1Desc').innerText = langData.s1Desc;
+            document.getElementById('s2Title').innerText = langData.s2Title;
+            document.getElementById('s2Desc').innerText = langData.s2Desc;
+            document.getElementById('s3Title').innerText = langData.s3Title;
+            document.getElementById('s3Desc').innerText = langData.s3Desc;
+            document.getElementById('footerText').innerText = langData.footerText;
+        }
+
+        function openModal() { document.getElementById('projectModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('projectModal').style.display = 'none'; }
+
+        function addNewProject() {
+            const title = document.getElementById('inputTitle').value;
+            const desc = document.getElementById('inputDesc').value;
+            const tags = document.getElementById('inputTags').value.split(',');
+            const url = document.getElementById('inputUrl').value;
+
+            if (title && url) {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'card';
+                projectCard.innerHTML = `
+                    <h3 class="card-title">${title}</h3>
+                    <p>${desc}</p>
+                    <div class="tags">
+                        ${tags.map(tag => `<span class="tag">${tag.trim()}</span>`).join('')}
+                    </div>
+                    <a href="${url}" target="_blank" class="btn btn-secondary">${currentLang === 'ar' ? 'عرض المستودع والكود' : 'View Source Code'}</a>
+                `;
+                document.getElementById('projectsList').appendChild(projectCard);
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
